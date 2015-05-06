@@ -45,8 +45,10 @@ public class Order extends BaseEntity{
 	public static List<Order> findAllEntities() {
 		return findByHQL("FROM Order");
 	}
-	
-	
+	// 已经付款的
+	public static List<Order> findByOrderTimeBetween(Long startTime, Long endTime) {
+		return findByHQL("FROM Order o WHERE o.disabled = ? AND o.orderTime >= ? AND o.orderTime < ?",true,startTime,endTime);
+	}
 	
 	public Board getBoard() {
 		return board;

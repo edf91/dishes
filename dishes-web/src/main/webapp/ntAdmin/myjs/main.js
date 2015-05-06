@@ -22,7 +22,6 @@ var loadAllDish = function(){
 				var status = "正常";
 				if(dish.activity) {
 					status = "处于活动";
-					continue;
 				}
 				if(dish.disabled) status = "冻结";
 				var str = "<tr><td class='center'>"+dish.name+"</td>"+

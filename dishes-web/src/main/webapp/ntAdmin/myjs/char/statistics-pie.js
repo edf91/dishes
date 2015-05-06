@@ -48,6 +48,7 @@ var initPie = function(obj){
 }
 $(function () {
 	$.post("/statis/getTopDish",{topNum:topNum},function(data){
+		console.log(data);
 		var obj = {};
 		obj.topNum = topNum;
 		obj.results = new Array();

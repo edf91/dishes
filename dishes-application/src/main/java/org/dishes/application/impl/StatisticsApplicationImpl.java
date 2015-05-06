@@ -36,13 +36,15 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 		for (Order order : allOrder) {
 			String[] dishIds = DataUtil.toArrayStr(order.getDishIds());
 			for (String dishId : dishIds) {
-				dishIdNum.put(dishId, dishIdNum.get(dishId) == null ? 0 : dishIdNum.get(dishId) + 1);
+				if(null != dishId && !"".equals(dishId))
+				dishIdNum.put(dishId, dishIdNum.get(dishId) == null ? 1 : dishIdNum.get(dishId) + 1);
 			}
 			String[] activeIds = DataUtil.toArrayStr(order.getActiveIds());
 			for (String activeId : activeIds) {
 				Activity activity = Activity.get(Activity.class, activeId);
+				if(activity != null)
 				for (Dish dish : activity.getDishs()) {
-					dishIdNum.put(dish.getId(), dishIdNum.get(dish.getId()) == null ? 0 : dishIdNum.get(dish.getId()) + 1);
+					dishIdNum.put(dish.getId(), dishIdNum.get(dish.getId()) == null ? 1 : dishIdNum.get(dish.getId()) + 1);
 				}
 			}
 		}

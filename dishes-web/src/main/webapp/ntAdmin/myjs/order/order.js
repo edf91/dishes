@@ -15,7 +15,7 @@ var loadOrderInfo = function(){
 				var order = orders[i];
 				var status = "已付款";
 				var btns = "<a onclick=orderDetail('"+order.id+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>查看</a>";
-				if(order.disabled){
+				if(!order.disabled){
 					status = "未付款";
 					btns += " <a onclick=pay('"+order.id+"','"+order.bePay+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>付款</a>";
 				}

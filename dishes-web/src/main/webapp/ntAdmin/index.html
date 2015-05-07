@@ -18,14 +18,20 @@
 		<form action="dashboard.html"  autocomplete="off" method="post" class="validate">
 		<div class="login">
 			<div class="email">
-				<label for="userAccount">账 号</label><div class="email-input"><div class="control-group"><div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="user" name="userAccount" class="{required:true}"></div></div></div>
+				<label for="userAccount">账 号</label><div class="email-input"><div class="control-group"><div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="user" name="userAccount"></div></div></div>
 			</div>
 			<div class="pw">
-				<label for="password">密 码</label><div class="pw-input"><div class="control-group"><div class="input-prepend"><span class="add-on"><i class="icon-lock"></i></span><input type="password" id="pw" name="password" class='{required:true}'></div></div></div>
+				<label for="password">密 码</label><div class="pw-input"><div class="control-group"><div class="input-prepend"><span class="add-on"><i class="icon-lock"></i></span><input type="password" id="pw" name="password"></div></div></div>
+			</div>
+			<div class="pw">
+				<label for="password">验证码</label>
+				
+					<div style="float: left;margin-left: 9px;" class="pw-input"><div class="control-group"><div class="input-prepend"><span class="add-on"><i class="icon-lock"></i></span><input type="text" style="width: 124px !important;" name="checkNum" class="valid"></div></div></div>
+					<a onclick="flushImg(this)" href="javascript:void(0)"><img src="/index/getCheckImg" style="margin-top:3px;height:33px"/></a>
 			</div>
 			<div class="remember">
 				<label class="checkbox">
-					<input type="checkbox" name="remember"> 记住我
+					<input type="checkbox" id="remember" name="remember"> 记住我
 				</label>
 			</div>
 		</div>

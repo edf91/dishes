@@ -1,7 +1,7 @@
 /**
- * 用户管理js脚本
+ * 分类管理js脚本
  */
-// 加载用户信息列表
+// 加载分类信息列表
 var loadDishTypeInfo = function(){
 	$("#dishTypeTablesContent").html("");
 	$.get("/ntAdmin/template/dishesTypeTemplate.html").done(function(data){
@@ -26,7 +26,6 @@ var loadDishTypeInfo = function(){
 	});
 }
 // 编辑分类
-// TODO 分类编辑 
 function editDish(dishId){
 	$.post('/dishesType/get',{dishId:dishId},function(data){
 		if(data.hasError){
@@ -35,16 +34,40 @@ function editDish(dishId){
     			content: data.errorMsg,
     			cancelValue: '取消'}).showModal();
 		}else{
-			$.get("/ntAdmin/template/dishesTypeEditTemplate.html").done(function(data){
-				dialog({
-					title:'编辑用户',
-					content:data
-				}).showModal();
+			$.get("/ntAdmin/template/dishesTypeEditTemplate.html").done(function(backHtml){
+				var d = dialog({
+					title:'编辑分类',
+					content:backHtml,
+					okValue:'提交',
+					ok:function(){
+						var that = this;
+						$.post("/dishesType/update",$("form").serialize(),function(data){
+							if(data.hasError){
+								$.jGrowl(data.errorMsg,{header:'编辑分类'});
+							}else{
+								dialog({
+				        			title: '编辑分类',
+				        			content: data.data,
+				        			cancelValue: '取消'}).showModal();
+				        		that.remove();
+				        		loadDishTypeInfo();
+							}
+						});
+					}
+				})
+				d.showModal();
+				var result = data.data;
+				console.log(result);
+				$("div[i='dialog']").find("#dishType-id").val(result.id);
+				$("div[i='dialog']").find("#dishType-name").val(result.name);
+				if(!result.disabled){
+					$("div[i='dialog']").find("#dishType-disabled").attr("checked",true);
+				}
 			});
 		}
 	});
 }
-// 删除用户
+// 删除分类
 function deleteDish(dishId,name,aTag){
 	var d = dialog({
 	    title: '删除分类',

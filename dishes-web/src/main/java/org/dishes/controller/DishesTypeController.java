@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.dishes.commons.InvokeResult;
 import org.dishes.facade.DishesTypeFacade;
 import org.dishes.facade.command.CreateDishesTypeCommand;
+import org.dishes.facade.command.DishTypeUpdateCommand;
 import org.dishes.facade.dto.DishTypeDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DishesTypeController {
 	@Inject
 	private DishesTypeFacade dishesTypeFacade;
+	
+	@ResponseBody
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
+	public InvokeResult<String> update(DishTypeUpdateCommand command){
+		return dishesTypeFacade.updateById(command);
+	}
 	/**
 	 * 获取有效的分类
 	 */

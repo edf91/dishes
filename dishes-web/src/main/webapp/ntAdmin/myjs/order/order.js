@@ -19,7 +19,7 @@ var loadOrderInfo = function(){
 					status = "未付款";
 					btns += " <a onclick=pay('"+order.id+"','"+order.bePay+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>付款</a>";
 				}
-				var str = "<tr><td>"+ order.id +"</td><td>"+ order.board.name +"</td><td>"+ order.bePay +"</td><td>"+ order.realPay +"</td><td>"+ order.orderTime +"</td><td class='center'>"+status+"</td><td>"+ order.remark +"</td>"+
+				var str = "<tr><td>"+ order.id +"</td><td>"+ order.board.name +"</td><td>"+ order.bePay +"</td><td>"+ order.realPay +"</td><td>"+ getDateStrByDateStap(order.orderTime) +"</td><td class='center'>"+status+"</td><td>"+ order.remark +"</td>"+
 						  "<td>"+btns+"</td></tr>";
 				$("tbody:first").append(str);
 			}

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "t_user")
 public class User extends BaseEntity{
 	
-	private static final String INIT_PASSWORD = "888888"; // 初始密码
+	public static final String INIT_PASSWORD = "888888"; // 初始密码
 	private static final String USER_ADMIN = "ADMIN_USER";
 	private static final String USER_CASHIER = "CASHIER_USER";
 	private static final String USER_WAITER = "WAITER_USER";
@@ -37,6 +37,7 @@ public class User extends BaseEntity{
 	private boolean disabled; // 是否无效，如果无效无法登陆
 	
 	public User() {
+		this.password = INIT_PASSWORD;
 	}
 	
 	public User(String userAccount){
@@ -70,6 +71,10 @@ public class User extends BaseEntity{
 		List<User> result = findByHQL(hql, this.getUserAccount(),this.getPassword());
 		if(result.isEmpty()) return null;
 		return result.get(0);
+	}
+	public void resetPassword() {
+		this.password = INIT_PASSWORD;
+		this.update();
 	}
 	/***********************public method end*****************/
 	
@@ -113,6 +118,7 @@ public class User extends BaseEntity{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	
 }

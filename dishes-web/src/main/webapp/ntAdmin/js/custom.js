@@ -1,4 +1,44 @@
 var initDatables;
+var getDateStrByDateStap = function(dateTimeStap){
+	var date = new Date(dateTimeStap);
+	return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日" + date.getHours() + "时" + date.getMinutes() + "分" + date.getSeconds() + "秒";
+}
+// 修改密码
+$(".mini li:last-child").before("<li><a href='#'><img src='img/icons/essen/16/config.png'>修改密码</a></li>")
+$(".mini li:last-child").prev().on("click",function(){
+	$.get("/ntAdmin/template/userEditPasswordTemplate.html").done(function(callBack){
+		var d = dialog({
+			title:'修改密码',
+			content:callBack,
+			okValue:'提交',
+			ok:function(){
+				var that = this;
+				$.post("/user/updatePassword",$("div[i='dialog']").find("form").serialize(),function(updateResult){
+					if(updateResult.hasError){
+						$.jGrowl(updateResult.errorMsg,{header:'修改密码'});
+					}else{
+						that.remove();
+						dialog({
+		        			title: '登陆',
+		        			content: updateResult.data,
+		        			okValue:'确定',
+		        			ok:function(){
+		        				window.location.href="index.html"
+		        			}}).showModal();
+					}
+				});
+			}
+		});
+		d.showModal();
+	})
+	
+});
+// 退出系统
+$(".mini li:last-child").on("click",function(){
+	$.post("/user/logout",{},function(data){
+		
+	});
+});
 $(window).resize(function() {
 	// chosen resize bug
 	"use strict";

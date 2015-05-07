@@ -15,4 +15,8 @@ public interface DishFacade {
 	InvokeResult<String> deleteDishById(String id);
 
 	InvokeResult<List<DishDTO>> listAllAvailable();
+
+	InvokeResult<DishDTO> getDishById(String id);
+
+	InvokeResult<String> update(CreateDishCommand command);
 }

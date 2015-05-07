@@ -19,7 +19,6 @@ var loadDishType = function(){
 			for(var i = 0;dishesTypes[i]; i++){
 				var dish = dishesTypes[i];
 				var str = "<option value='"+dish.id+"'>" +dish.name+ "</option>";
-				console.log(str);
 				$("#dishType").append(str);
 			}
 		}
@@ -28,9 +27,9 @@ var loadDishType = function(){
 function addDish(){
 	$.post("/dish/add",$("form").serialize(),function(data){
 		if(data.hasError){
-			$.jGrowl(data.errorMsg,{header:'添加菜'});
+			$.jGrowl(data.errorMsg,{header:'编辑菜谱'});
 		}else{
-			$.jGrowl(data.data,{header:'添加菜'});
+			$.jGrowl(data.data,{header:'编辑菜谱'});
 		}
 	});
 	return false;

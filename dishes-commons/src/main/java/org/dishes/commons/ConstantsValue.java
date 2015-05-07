@@ -32,4 +32,8 @@ public class ConstantsValue {
 	 * 订单异常代码701
 	 */
 	public static final String ERROR_ORDER_CODE = "701";
+	/**
+	 * 验证码存于session
+	 */
+	public static final String CHECK_NUM_NAME_SESSION = "CHECK_NUM_NAME";
 }

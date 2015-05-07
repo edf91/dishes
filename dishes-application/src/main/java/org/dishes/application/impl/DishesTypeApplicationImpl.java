@@ -36,4 +36,8 @@ public class DishesTypeApplicationImpl implements DishesTypeApplication{
 		return DishType.findAllAvailableDishType();
 	}
 
+	public void updateDishType(DishType dishType) {
+		dishType.update();
+	}
+
 }

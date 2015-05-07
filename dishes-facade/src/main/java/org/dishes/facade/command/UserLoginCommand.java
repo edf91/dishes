@@ -4,8 +4,15 @@ public class UserLoginCommand {
 	
 	private String userAccount;
 	private String password;
+	private String checkNum;
 	
 	
+	public String getCheckNum() {
+		return checkNum;
+	}
+	public void setCheckNum(String checkNum) {
+		this.checkNum = checkNum;
+	}
 	public String getUserAccount() {
 		return userAccount;
 	}

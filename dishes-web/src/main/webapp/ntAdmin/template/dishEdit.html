@@ -1,0 +1,54 @@
+		<div class="content" style="padding-bottom:1px;">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box">
+						<div class="box-content">
+							<form class='validate form-horizontal'>
+								<input type="hidden" id="id-edit" name="id">
+								<div class="control-group">
+									<label for="req" class="control-label">菜名</label>
+									<div class="controls">
+										<input type="text" id="name-edit" placeholder="请输入菜名" name="name" class='required'>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="twoicons" class="control-label">价格</label>
+									<div class="controls">
+										<div class="input-prepend input-append">
+											<span class="add-on">$</span><input type="text" id="price-edit" name="price" placeholder="请输入价格" class='input-square' name="twoicons" id="twoicons"><span class="add-on">.00</span>
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="selsear" class="control-label">类型</label>
+									<div class="controls">
+										<select name="dishTypeId" id="dishType-edit">
+										</select>
+									</div>
+								</div>
+								<div class="control-group">
+										<label class="control-label">是否特价</label>
+										<div class="controls">
+											<label class="checkbox"><input id='isActivity-edit' name="isActivity" type="checkbox">是</label>
+										</div>
+								</div>
+								<div class="control-group">
+									<label for="twoicons" class="control-label">特价价格</label>
+									<div class="controls">
+										<div class="input-prepend input-append">
+											<span class="add-on">$</span><input disabled type="text" id="activityPrice-edit" name="activityPrice" placeholder="请输入特价价格" class='input-square' name="twoicons" id="twoicons"><span class="add-on">.00</span>
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="basictext" class="control-label">描述</label>
+									<div class="controls">
+										<textarea name="description" id="basictext-edit" class='span9 input-square' rows="6"></textarea>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	

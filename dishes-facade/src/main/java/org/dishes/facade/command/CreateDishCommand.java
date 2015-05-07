@@ -2,6 +2,7 @@ package org.dishes.facade.command;
 
 
 public class CreateDishCommand {
+	private String id;
 	private String name; // 菜名
 	private String dishTypeId; // 类型
 	private double price; // 价格
@@ -50,6 +51,12 @@ public class CreateDishCommand {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

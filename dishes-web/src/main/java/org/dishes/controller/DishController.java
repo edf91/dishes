@@ -19,7 +19,16 @@ public class DishController {
 	@Inject
 	private DishFacade dishFacade;
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
+	public InvokeResult<String> update(CreateDishCommand command){
+		return dishFacade.update(command);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/get",method = RequestMethod.POST)
+	public InvokeResult<DishDTO> get(String id){
+		return dishFacade.getDishById(id);
+	}
 	@ResponseBody
 	@RequestMapping(value = "/listAvailable",method = RequestMethod.POST) 
 	public InvokeResult<List<DishDTO>> listAvailable(){

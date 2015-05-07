@@ -34,5 +34,11 @@ public class UserApplicationImpl implements UserApplication {
 	public User doLogin(User user) {
 		return user.doLogin();
 	}
+	public void resetPassword(String userId) {
+		this.getUserById(userId).resetPassword();
+	}
+	public void update(User user) {
+		user.update();
+	}
 	
 }

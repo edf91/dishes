@@ -29,5 +29,9 @@ public class DishApplicationImpl implements DishApplication {
 	public List<Dish> listAllAvailableDish() {
 		return Dish.listAllAvailable();
 	}
+
+	public void disabledDishById(String id) {
+		Dish.get(Dish.class, id).setDisabled(true);
+	}
 	
 }

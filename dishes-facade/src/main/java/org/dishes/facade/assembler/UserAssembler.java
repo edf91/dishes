@@ -44,6 +44,7 @@ public class UserAssembler {
 		User result = new User();
 		result.setType(command.getRoleName());
 		result.setName(command.getName());
+		result.setUserAccount(command.getUserAccount());
 		return result;
 	}
 	/**
@@ -69,6 +70,7 @@ public class UserAssembler {
 		SessionUser result = new SessionUser();
 		result.setId(entity.getId());
 		result.setName(entity.getName());
+		result.setRoleName(entity.getType());
 		return result;
 	}
 }

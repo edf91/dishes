@@ -22,7 +22,11 @@ public class UserController {
 	
 	@Resource
 	private UserFacade userFacade;
-	
+	@ResponseBody
+	@RequestMapping(value = "/resetPassword",method = RequestMethod.POST)
+	public InvokeResult<String> resetPassword(String userId){
+		return userFacade.resetPassword(userId);
+	}
 	/**
 	 * 删除用户
 	 * @param userId

@@ -25,7 +25,7 @@ var loadUserInfo = function(){
 				}
 				var str = "<tr><td>"+ user.userAccount +"</td><td class='center'>"+user.name+"</td>"+
 						  "<td class='center'>"+roleName+"</td><td class='center'>"+status+"</td>"+
-						  "<td><a onclick=editUser('"+user.id+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>编辑</a>"+
+						  "<td><a onclick=resetPassword('"+user.id+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>重置密码</a>"+
 						  "<a onclick=deleteUser('"+user.id+"','"+user.userAccount+"',this) class='btn btn-danger' href='#'><i class='glyphicon glyphicon-trash icon-white'></i>删除</a></td></tr>";
 				$("tbody:first").append(str);
 			}
@@ -34,8 +34,21 @@ var loadUserInfo = function(){
 		}
 	});
 }
+// 重置密码
+function resetPassword(userId){
+	$.post('/user/resetPassword',{userId:userId},function(data){
+		if(data.hasError){
+			$.jGrowl(data.errorMsg,{header:'重置密码'});
+		}else{
+			dialog({
+    			title: '重置密码',
+    			content: data.data,
+    			cancelValue: '取消'}).showModal();
+    		that.remove();
+		}
+	});
+}
 // 编辑用户
-// TODO 用户编辑 
 function editUser(userId){
 	$.post('/user/get',{userId:userId},function(data){
 		if(data.hasError){
@@ -44,11 +57,19 @@ function editUser(userId){
     			content: data.errorMsg,
     			cancelValue: '取消'}).showModal();
 		}else{
-			$.get("/ntAdmin/template/userEditTemplate.html").done(function(data){
-				dialog({
+			$.get("/ntAdmin/template/userEditTemplate.html").done(function(backHtml){
+				var d = dialog({
 					title:'编辑用户',
-					content:data
-				}).showModal();
+					content:backHtml,
+					okValue:'提交',
+					ok:function(){
+						alert(123);
+					}
+				})
+				var result = data.data;
+				d.showModal();
+				$("div[i='dialog']").find("#edit-userAccount").val(result.userAccount);
+				$("div[i='dialog']").find("#edit-name").val(result.name);
 			});
 		}
 	});

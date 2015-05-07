@@ -27,4 +27,5 @@ public interface DishesTypeApplication {
 	DishType getDishTypeById(String dishId);
 	void deletDishTypeById(String dishId);
 	List<DishType> listAvailableDishType();
+	void updateDishType(DishType dishType);
 }

@@ -14,4 +14,6 @@ public interface DishApplication {
 	void deleteDishById(String id);
 
 	List<Dish> listAllAvailableDish();
+
+	void disabledDishById(String id);
 }

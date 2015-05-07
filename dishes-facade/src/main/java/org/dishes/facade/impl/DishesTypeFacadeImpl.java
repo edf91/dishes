@@ -11,6 +11,7 @@ import org.dishes.commons.InvokeResult;
 import org.dishes.facade.DishesTypeFacade;
 import org.dishes.facade.assembler.DishesTypeAssembler;
 import org.dishes.facade.command.CreateDishesTypeCommand;
+import org.dishes.facade.command.DishTypeUpdateCommand;
 import org.dishes.facade.dto.DishTypeDTO;
 /**
  * 分类控制器实现类
@@ -46,6 +47,12 @@ public class DishesTypeFacadeImpl implements DishesTypeFacade{
 	}
 	public InvokeResult<List<DishTypeDTO>> listAvailableDishType() {
 		return InvokeResult.success(DishesTypeAssembler.toDTOs(dishesTypeApplication.listAvailableDishType()));
+	}
+	
+	public InvokeResult<String> updateById(DishTypeUpdateCommand command) {
+//		if(dishesTypeApplication.isNameExists(command.getName())) return InvokeResult.failure(ConstantsValue.ERROR_DISHES_TYPE_CODE,"名称已经存在");
+		dishesTypeApplication.updateDishType(DishesTypeAssembler.toUpdateEntity(command));
+		return InvokeResult.success("更新分类成功");
 	}
 
 

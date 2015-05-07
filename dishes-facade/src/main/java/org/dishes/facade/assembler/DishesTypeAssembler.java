@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.dishes.domain.DishType;
 import org.dishes.facade.command.CreateDishesTypeCommand;
+import org.dishes.facade.command.DishTypeUpdateCommand;
 import org.dishes.facade.dto.DishTypeDTO;
 
 /**
@@ -32,5 +33,13 @@ public class DishesTypeAssembler {
 			results.add(toDTO(entity));
 		}
 		return results;
+	}
+
+	public static DishType toUpdateEntity(DishTypeUpdateCommand command) {
+		DishType result = new DishType();
+		result.setId(command.getId());
+		result.setName(command.getName());
+		result.setDisabled(!"on".equals(command.getDisabled()));
+		return result;
 	}
 }

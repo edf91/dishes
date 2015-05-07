@@ -36,4 +36,6 @@ public interface UserApplication {
 	 */
 	User getUserById(String userId);
 	User doLogin(User user);
+	void resetPassword(String userId);
+	void update(User user);
 }

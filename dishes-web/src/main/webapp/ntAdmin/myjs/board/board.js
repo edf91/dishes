@@ -1,7 +1,7 @@
 /**
- * 用户管理js脚本
+ * 餐桌管理js脚本
  */
-// 加载用户信息列表
+// 加载餐桌信息列表
 var loadBoardInfo = function(){
 	$("#boardTablesContent").html("");
 	$.get("/ntAdmin/template/boardTemplate.html").done(function(data){
@@ -17,8 +17,7 @@ var loadBoardInfo = function(){
 				if(board.use) status = "有客";
 				var str = "<tr><td class='center'>"+board.name+"</td>"+
 						  "<td class='center'>"+status+"</td>"+
-						  "<td><a onclick=editBoard('"+board.id+"') class='btn btn-info' href='#'><i class='glyphicon glyphicon-edit icon-white'></i>编辑</a>"+
-						  "<a onclick=deleteBoard('"+board.id+"','"+board.name+"',this) class='btn btn-danger' href='#'><i class='glyphicon glyphicon-trash icon-white'></i>删除</a></td></tr>";
+						  "<td><a onclick=deleteBoard('"+board.id+"','"+board.name+"',this) class='btn btn-danger' href='#'><i class='glyphicon glyphicon-trash icon-white'></i>删除</a></td></tr>";
 				$("tbody:first").append(str);
 			}
 			// 初始化表
@@ -26,31 +25,7 @@ var loadBoardInfo = function(){
 		}
 	});
 }
-// 编辑餐桌
-// TODO 餐桌编辑
-function editBoard(id){
-	$.post('/board/get',{boardId:id},function(data){
-		if(data.hasError){
-			dialog({
-    			title: '编辑餐桌',
-    			content: data.errorMsg,
-    			cancelValue: '取消'}).showModal();
-		}else{
-			var result = data.data;
-			$.get("/ntAdmin/template/boardEditTemplate.html").done(function(backHtml){
-				console.log($(backHtml).find("#board-name"));
-				console.log(result.name);
-				$(backHtml).find("#board-name").eq(0).value=result.name;
-				
-				dialog({
-					title:'编辑餐桌',
-					content:backHtml
-				}).showModal();
-			});
-		}
-	});
-}
-// 删除用户
+// 删除餐桌
 function deleteBoard(id,name,aTag){
 	var d = dialog({
 	    title: '删除餐桌',

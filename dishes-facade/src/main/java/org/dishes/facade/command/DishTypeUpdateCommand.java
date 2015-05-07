@@ -1,9 +1,9 @@
-package org.dishes.facade.dto;
+package org.dishes.facade.command;
 
-public class SessionUser {
+public class DishTypeUpdateCommand {
 	private String id;
 	private String name;
-	private String roleName;
+	private String disabled;
 	public String getId() {
 		return id;
 	}
@@ -16,11 +16,11 @@ public class SessionUser {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getRoleName() {
-		return roleName;
+	public String getDisabled() {
+		return disabled;
 	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setDisabled(String disabled) {
+		this.disabled = disabled;
 	}
 	
 	

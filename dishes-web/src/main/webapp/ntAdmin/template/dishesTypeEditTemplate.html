@@ -3,23 +3,18 @@
 		<div class="box">
 			<div class="box-content">
 				<form action="#" class='validate form-horizontal'>
+					<input type="hidden" name="id" id="dishType-id"/>
 					<div class="control-group">
 						<label for="req" class="control-label">名称</label>
 						<div class="controls">
-							<input type="text" name="name" value="" id="board-name" class='required'>
+							<input type="text" name="name" value="" id="dishType-name" class='required'>
 						</div>
 					</div>
 					<div class="control-group">
-					<label for="sela" class="control-label">状态</label>
-						<div class="controls">
-							<select name="roleName" id="sela" class='{required:true}'>
-								<option value=''>正常</option>
-								<option value="ADMIN_USER">有客人</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-actions">
-						<input type="submit" class='btn btn-primary'>
+							<label class="control-label">是否使用</label>
+							<div class="controls">
+								<label class="checkbox"><input name="disabled" id="dishType-disabled" type="checkbox">是</label>
+							</div>
 					</div>
 				</form>
 			</div>

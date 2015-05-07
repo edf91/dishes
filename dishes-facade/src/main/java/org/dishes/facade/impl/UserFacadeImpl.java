@@ -12,6 +12,7 @@ import org.dishes.domain.User;
 import org.dishes.facade.UserFacade;
 import org.dishes.facade.assembler.UserAssembler;
 import org.dishes.facade.command.CreateUserCommand;
+import org.dishes.facade.command.UpdatePasswordCommand;
 import org.dishes.facade.command.UserLoginCommand;
 import org.dishes.facade.dto.SessionUser;
 import org.dishes.facade.dto.UserDTO;
@@ -72,6 +73,26 @@ public class UserFacadeImpl implements UserFacade{
 			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,null);
 		}
 		
+	}
+	public InvokeResult<String> resetPassword(String userId) {
+		try {
+			userApplication.resetPassword(userId);
+			return InvokeResult.success("重置密码成功，密码为" + User.INIT_PASSWORD);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"重置密码失败");
+		}
+	}
+	public InvokeResult<String> updatePassword(String userId,
+			UpdatePasswordCommand command) {
+		if(null == command.getNewPassword() || null == command.getConfirmPassword() || !command.getConfirmPassword().equals(command.getNewPassword()))
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"新密码与确认密码不一致");
+		User user = userApplication.getUserById(userId);
+		if(user == null || null == user.getPassword() || null == command.getOldPassword()) return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"修改密码失败");
+		if(!user.getPassword().equals(command.getOldPassword())) return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"旧密码错误");
+		user.setPassword(command.getNewPassword());
+		userApplication.update(user);
+		return InvokeResult.success("修改密码成功，请重新登陆");
 	}
 	
 

@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <title>日式餐厅点菜系统</title>
 <meta name="description" content="">
-
 <meta name="viewport" content="width=device-width">
-
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.css">
 <link rel="stylesheet" href="css/jquery.fancybox.css">
@@ -16,11 +14,9 @@
 <link rel="stylesheet" href="css/jquery.plupload.queue.css">
 <link rel="stylesheet" href="css/jquery.tagsinput.css">
 <link rel="stylesheet" href="css/jquery.ui.plupload.css">
-<link rel="stylesheet" href="js/tableTools/css/TableTools.css">
 <link rel="stylesheet" href="css/chosen.css">
-<link rel="stylesheet" href="css/chosen.css">
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/jquery.jgrowl.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="mycss/ui-dialog.css">
 </head>
 <body>
@@ -28,7 +24,22 @@
 	<img src="img/icons/fugue/color.png" alt="" class='tip' title="Toggle style-switcher" data-placement="right">
 </div>					
 <div class="style-switcher">
-	<h3>&nbsp;&nbsp;&nbsp;&nbsp;选择背景色&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	<h3>Style-switcher</h3>
+	<ul class='color'>
+		<li>
+			<a href="#" class='style'>Default</a>
+		</li>
+		<li>
+			<a href="#" class='blue'>Blue</a>
+		</li>
+		<li>
+			<a href="#" class='green'>Green</a>
+		</li>
+		<li>
+			<a href="#" class='red'>Red</a>
+		</li>
+	</ul>
+	<h3>Pattern-switcher</h3>
 	<ul class='pattern'>
 		<li>
 			<a href="#" class='default'>Default</a>
@@ -47,6 +58,30 @@
 	<div class="container-fluid">
 		<a href="dashboard.html" class='company'>日式餐厅点菜系统</a>
 		<ul class='mini'>
+			<li id="activeBeOpen" class='dropdown dropdown-noclose supportContainer'>
+				<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+					<img src="myimg/coking.png" alt="">
+					活动总价：<label style="display:inline;color: 'red';" id="active-totalPrice">0</label>￥
+					<span id="active-totalNum" class="label label-warning">0</span>
+				</a>
+				<ul class="dropdown-menu pull-right custom custom-dark active-detail">
+				</ul>
+			</li>
+			<li id="normalBeOpen" class='dropdown pendingContainer'>
+				<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+					<img src="myimg/coking.png" alt="">
+					常规总价：<label style="display:inline;color: 'red';" id="normal-totalPrice">0</label>￥
+					<span id="normal-totalNum" class="label label-important">0</span>
+				</a>
+				<ul class="dropdown-menu pull-right custom custom-dark normal-detail">
+				</ul>
+			</li>
+			<li class='dropdown messageContainer'>
+				<a href="javascript:subOrder()">
+					<img src="img/icons/essen/16/shipping.png" alt="">
+					<span style="color:#fff;">确认订单</span>
+				</a>
+			</li>
 			<li>
 				<a href="index.html">
 					<img src="img/icons/fugue/control-power.png" alt="">
@@ -54,124 +89,83 @@
 				</a>
 			</li>
 		</ul>
-	
 	</div>
 </div>
 <div class="breadcrumbs">
 	<div class="container-fluid">
 		<ul class="bread pull-left">
 			<li>
-				<a href='adminIndex.html'><i class="icon-home icon-white"></i></a>
+				<a href="cashierIndex.html"><i class="icon-home icon-white"></i></a>
 			</li>
 			<li>
-				<a href="adminIndex.html">
+				<a href="cashierIndex.html">
 					点餐
 				</a>
 			</li>
 		</ul>
-
 	</div>
 </div>
 <div class="main">
 	<div class="container-fluid">
 	<div class="navi">
 		<ul class='main-nav'>
-			<li>
-				<a href="adminIndex.html" class='light'>
+			<li class="active">
+				<a href="cashierIndex.html" class='light'>
 					<div class="ico"><i class="icon-home icon-white"></i></div>
 					点餐
 				</a>
 			</li>
 			<li>
-				<a href="orderList.html" class='light'>
+				<a href="cashierOrderList.html" class='light'>
 					<div class="ico"><i class="icon-edit  icon-white"></i></div>
 					订单管理
 				</a>
 			</li>
-			<li class="active open">
-				<a href="#" class="light toggle-collapsed">
-					<div class="ico"><i class="icon-cog icon-white"></i></div>
-					系统管理
-					<img src="img/toggle-subnav-up-white.png" alt="">
-				</a>
-				<ul class="collapsed-nav">
-					<li>
-						<a href="dishList.html" style="margin-left: 0px;">
-							菜谱列表
-						</a>
-					</li>
-					<li>
-						<a href="dishAdd.html">
-							添加菜谱
-						</a>
-					</li>
-					<li class="active">
-						<a href="boardList.html" style="margin-left: 0px;">
-							餐桌列表
-						</a>
-					</li>
-					<li>
-						<a href="boardAdd.html">
-							添加餐桌
-						</a>
-					</li>
-					<li>
-						<a href="activeList.html" style="margin-left: 0px;">
-							活动列表
-						</a>
-					</li>
-					<li>
-						<a href="activeAdd.html">
-							添加活动
-						</a>
-					</li>
-					<li>
-						<a href="dishTypeList.html" style="margin-left: 0px;">
-							分类列表
-						</a>
-					</li>
-					<li>
-						<a href="dishTypeAdd.html">
-							添加分类
-						</a>
-					</li>
-					<li>
-						<a href="dishStatistics.html" style="margin-left: 0px;">
-							销售统计
-						</a>
-					</li>
-					<li>
-						<a href="dishTOP5.html">
-							最热销TOP5
-						</a>
-					</li>
-					<li>
-						<a href="userList.html" style="margin-left: 0px;">
-							用户列表
-						</a>
-					</li>
-					<li>
-						<a href="userAdd.html">
-							添加用户
-						</a>
-					</li>
-				</ul>
-			</li>
 		</ul>
 	</div>
 	<div class="content">
-		<div class="row-fluid">
-			<div class="span12">
-				<div class="box">
-					<div class="box-head">
-						<h3>餐桌列表</h3>
-					</div>
-					<div id="boardTablesContent"  class="box-content box-nomargin">
+			<div id="board-select" class="row-fluid">
+				<div class="span12">
+					<div class="box">
+						<div class="box-head">
+							<h3>请选择餐桌</h3>
+						</div>
+						<div class="box-content">
+							<ul id="selectBoard" class="quicktasks">
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			<div id="dish-select" class="row-fluid" hidden="true">
+				<div class="span12">
+					<div class="box">
+						<div class="box-head tabs">
+							<h3>请选择料理</h3>
+							<ul class="nav nav-tabs">
+								<li>
+									<a style="cursor:pointer;" onclick="javascript:backSelectBoard()" >返回</a>
+								</li>
+								<li id="todayActive-li" class='active'>
+									<a href="#0" data-toggle="tab">今日活动</a>
+								</li>
+								<li id="todayNormal-li">
+									<a href="#1" data-toggle="tab">常规</a>
+								</li>
+							</ul>
+						</div>
+						<div class="box-content">
+							<div class="tab-content">
+								<div class="tab-pane active todayActivity" id="0">
+								</div>
+								<div class="tab-pane normal" id="1">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
 	</div>
 </div>	
 <script src="js/jquery.js"></script>
@@ -195,9 +189,8 @@
 <script src="js/ui.spinner.js"></script>
 <script src="js/jquery.jgrowl_minimized.js"></script>
 <script src="js/jquery.cookie.js"></script>
-<script src="js/tableTools/js/TableTools.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/demo.js"></script>
-<script src="myjs/board/board.js"></script>
+<script src="myjs/main.js"></script>
 </body>
 </html>

@@ -3,19 +3,11 @@
 		<div class="box">
 			<div class="box-content">
 				<form action="#" class='validate form-horizontal'>
+					<input type="hidden" id="board-edit-id" name="id"/>
 					<div class="control-group">
 						<label for="req" class="control-label">名称</label>
 						<div class="controls">
-							<input type="text" name="name" value="" id="board-name" class='required'>
-						</div>
-					</div>
-					<div class="control-group">
-					<label for="sela" class="control-label">状态</label>
-						<div class="controls">
-							<select name="roleName" id="sela" class='{required:true}'>
-								<option value=''>正常</option>
-								<option value="ADMIN_USER">有客人</option>
-							</select>
+							<input type="text" id="board-edit-name" name="name" value="" id="board-name" class='required'>
 						</div>
 					</div>
 					<div class="form-actions">

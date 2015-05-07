@@ -12,6 +12,8 @@ import org.dishes.domain.User;
 import org.dishes.facade.UserFacade;
 import org.dishes.facade.assembler.UserAssembler;
 import org.dishes.facade.command.CreateUserCommand;
+import org.dishes.facade.command.UserLoginCommand;
+import org.dishes.facade.dto.SessionUser;
 import org.dishes.facade.dto.UserDTO;
 /**
  * 用户门面层
@@ -57,6 +59,19 @@ public class UserFacadeImpl implements UserFacade{
 			e.printStackTrace();
 			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"用户不能存在");
 		}
+	}
+	public InvokeResult<SessionUser> doLogin(UserLoginCommand command) {
+		try {
+			User user = userApplication.doLogin(UserAssembler.toLoginEntity(command));
+			if(user != null){
+				return InvokeResult.success(UserAssembler.toSessionUser(user));
+			}
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,null);
+		}
+		
 	}
 	
 

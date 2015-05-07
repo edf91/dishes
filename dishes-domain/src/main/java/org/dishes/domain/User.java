@@ -4,17 +4,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 系统用户，对应员工
  */
 @Entity
-public abstract class User extends Actor{
+@Table(name = "t_user")
+public class User extends BaseEntity{
 	
 	private static final String INIT_PASSWORD = "888888"; // 初始密码
-	
+	private static final String USER_ADMIN = "ADMIN_USER";
+	private static final String USER_CASHIER = "CASHIER_USER";
+	private static final String USER_WAITER = "WAITER_USER";
 	private static final long serialVersionUID = -8898252061681247502L;
 	
+	@Column(name = "name")
+	private String name; // 名称
 	@Column(name = "user_account")
 	private String userAccount; // 账号
 	
@@ -24,13 +30,13 @@ public abstract class User extends Actor{
 	@Column(name = "tel_phone")
 	private String  telPhone; // 联系方式
 	
-	@Column(name = "type",insertable = false, updatable = false)
-	private String type; // 用户类型,不需要主动插入以及更新，因此只需要提供get方法
+	@Column(name = "type")
+	private String type; // 用户类型
 	
 	@Column(name = "disabled")
 	private boolean disabled; // 是否无效，如果无效无法登陆
 	
-	protected User() {
+	public User() {
 	}
 	
 	public User(String userAccount){
@@ -58,6 +64,13 @@ public abstract class User extends Actor{
 	/***********************static method end*****************/
 	
 	/***********************public method start*****************/
+
+	public User doLogin() {
+		String hql = "FROM User u WHERE u.userAccount = ? AND u.password = ?";
+		List<User> result = findByHQL(hql, this.getUserAccount(),this.getPassword());
+		if(result.isEmpty()) return null;
+		return result.get(0);
+	}
 	/***********************public method end*****************/
 	
 	/*get/set method*/
@@ -93,7 +106,13 @@ public abstract class User extends Actor{
 		this.type = type;
 	}
 
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	
 }

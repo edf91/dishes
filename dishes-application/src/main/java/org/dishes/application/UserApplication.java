@@ -35,4 +35,5 @@ public interface UserApplication {
 	 * @return
 	 */
 	User getUserById(String userId);
+	User doLogin(User user);
 }

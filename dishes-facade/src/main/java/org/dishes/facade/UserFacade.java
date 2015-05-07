@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.dishes.commons.InvokeResult;
 import org.dishes.facade.command.CreateUserCommand;
+import org.dishes.facade.command.UserLoginCommand;
+import org.dishes.facade.dto.SessionUser;
 import org.dishes.facade.dto.UserDTO;
 
 
@@ -34,4 +36,10 @@ public interface UserFacade {
 	 * @return
 	 */
 	InvokeResult<UserDTO> getUserById(String userId);
+	/**
+	 * 用户登陆
+	 * @param command
+	 * @return
+	 */
+	InvokeResult<SessionUser> doLogin(UserLoginCommand command);
 }

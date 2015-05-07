@@ -31,5 +31,8 @@ public class UserApplicationImpl implements UserApplication {
 	public User getUserById(String userId) {
 		return User.get(User.class, userId);
 	}
+	public User doLogin(User user) {
+		return user.doLogin();
+	}
 	
 }

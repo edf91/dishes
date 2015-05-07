@@ -3,11 +3,10 @@ package org.dishes.facade.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dishes.domain.AdminUser;
-import org.dishes.domain.CashierUser;
 import org.dishes.domain.User;
-import org.dishes.domain.WaiterUser;
 import org.dishes.facade.command.CreateUserCommand;
+import org.dishes.facade.command.UserLoginCommand;
+import org.dishes.facade.dto.SessionUser;
 import org.dishes.facade.dto.UserDTO;
 
 /**
@@ -42,14 +41,8 @@ public class UserAssembler {
 	 * @return
 	 */
 	public static User toEntity(CreateUserCommand command) {
-		User result = null;
-		if("ADMIN_USER".equals(command.getRoleName())){
-			result = new AdminUser(command.getUserAccount());
-		}else if("WAITER_USER".equals(command.getRoleName())){
-			result = new WaiterUser(command.getUserAccount());
-		}else if("CASHIER_USER".equals(command.getRoleName())){
-			result = new CashierUser(command.getUserAccount());
-		}
+		User result = new User();
+		result.setType(command.getRoleName());
 		result.setName(command.getName());
 		return result;
 	}
@@ -64,6 +57,18 @@ public class UserAssembler {
 		result.setRoleName(entity.getType());
 		result.setUserAccount(entity.getUserAccount());
 		result.setTelPhone(entity.getTelPhone());
+		return result;
+	}
+	public static User toLoginEntity(UserLoginCommand command) {
+		User user = new User();
+		user.setPassword(command.getPassword());
+		user.setUserAccount(command.getUserAccount());
+		return user;
+	}
+	public static SessionUser toSessionUser(User entity) {
+		SessionUser result = new SessionUser();
+		result.setId(entity.getId());
+		result.setName(entity.getName());
 		return result;
 	}
 }

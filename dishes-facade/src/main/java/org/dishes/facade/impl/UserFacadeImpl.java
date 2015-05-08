@@ -67,10 +67,10 @@ public class UserFacadeImpl implements UserFacade{
 			if(user != null){
 				return InvokeResult.success(UserAssembler.toSessionUser(user));
 			}
-			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,null);
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"用户不存在");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,null);
+			return InvokeResult.failure(ConstantsValue.ERROR_USER_CODE,"登陆失败");
 		}
 		
 	}

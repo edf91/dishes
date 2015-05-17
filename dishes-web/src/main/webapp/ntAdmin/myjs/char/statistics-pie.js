@@ -1,17 +1,12 @@
 // 最受欢迎统计
 var topNum = 5;
 var initPie = function(obj){
-	Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
-	    return {
-	        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-	        stops: [
-	            [0, color],
-	            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-	        ]
-	    };
-	});
+	var timestamp = Date.parse(new Date());
+	timestamp += "a";
+	$(".box-content").html('<div id="'+timestamp+'" style="min-width: 310px; height: 400px; margin: 0 auto"></div>');
+	$("#topNums").text("最热销TOP"+obj.topNum+"饼图");
 	// Build the chart
-    $('#container').highcharts({
+    $('#'+timestamp).highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -46,9 +41,12 @@ var initPie = function(obj){
     $(".highcharts-button").remove();
 	$(".highcharts-tooltip").next().remove();
 }
-$(function () {
+function toShow(tagA){
+	topNum = $("#showNum").val();
+	loadStatic(topNum);
+}
+var loadStatic = function(topNum){
 	$.post("/statis/getTopDish",{topNum:topNum},function(data){
-		console.log(data);
 		var obj = {};
 		obj.topNum = topNum;
 		obj.results = new Array();
@@ -63,5 +61,16 @@ $(function () {
 		}
 		initPie(obj);
 	});
-	
+}
+$(function () {
+	Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+	    return {
+	        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+	        stops: [
+	            [0, color],
+	            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+	        ]
+	    };
+	});
+	loadStatic(topNum);
 });

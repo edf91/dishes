@@ -1,8 +1,13 @@
 var initDatables;
 var getDateStrByDateStap = function(dateTimeStap){
 	var date = new Date(dateTimeStap);
-	return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日" + date.getHours() + "时" + date.getMinutes() + "分" + date.getSeconds() + "秒";
+	return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日" + date.getHours() + "时" + date.getMinutes() + "分" + date.getSeconds() + "秒";
 }
+$(".container-fluid").eq(0).css({
+	'background-image': "url(myimg/bg.jpg)",
+	'background-repeat': "repeat-x",
+	'background-position-y': "-149px"
+});
 // 修改密码
 $(".mini li:last-child").before("<li><a href='#'><img src='img/icons/essen/16/config.png'>修改密码</a></li>")
 $(".mini li:last-child").prev().on("click",function(){
@@ -236,7 +241,6 @@ $(document).ready(function() {
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
-
 	if($('.calendar').length > 0){
 		$('.calendar').fullCalendar({
 			header: {
@@ -566,4 +570,5 @@ $(document).ready(function() {
 
 		});
 	}
+	
 });

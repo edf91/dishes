@@ -126,6 +126,5 @@ public class Order extends BaseEntity{
 	public void setRealPrice(double realPrice) {
 		this.realPrice = realPrice;
 	}
-
 	
 }

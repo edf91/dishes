@@ -103,7 +103,35 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
 	</dependencies>
-
+	<!-- <build> 
+		<finalName>/</finalName>
+		<plugins> 
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId> 
+				<artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.2.3</version> 
+				<configuration> 
+					<container> 
+						<containerId>tomcat7x</containerId> 
+						<home>D:/Software/DEVELOPMENT/tomcat7</home> 
+					</container>
+					<configuration> 
+						<type>existing</type> 
+						<home>D:/Software/DEVELOPMENT/tomcat7</home> 
+					</configuration> 
+				</configuration> 
+				<executions> 
+					<execution> 
+						<id>cargo-run</id> 
+						<phase>install</phase>
+						<goals>
+						 <goal>run</goal>
+						</goals>
+					</execution>
+				</executions> 
+		</plugin> 
+		</plugins>
+	 </build> -->
 	<build>
 		<plugins>
 			<plugin>

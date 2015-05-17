@@ -8,9 +8,9 @@ function flushImg(btn){
 }
 // 记住用户名密码
 if(localStorage.getItem("account")&&localStorage.getItem("psw")){
-	document.getElementById("user").value=localStorage.getItem("account");
-	document.getElementById("pw").value=localStorage.getItem("psw");
-	document.getElementById("remember").checked=true;
+	$("#user").val(localStorage.getItem("account"));
+	$("#pw").val(localStorage.getItem("psw"));
+	$("#remember").attr('checked',true);
 }
 //保存用户名和密码
 var rememberMe = function (){
@@ -29,10 +29,9 @@ var rememberMe = function (){
 function doLogin(){
 	rememberMe();
 	$.post("/user/login",$("form").serialize(),function(data){
-		console.log(data);
 		if(data.hasError){
 			$("#error").remove();
-			$("form").prepend("<div id='error' class='alert alert-error'><strong>Error!</strong> "+data.errorMsg+"</div>");
+			$("form").prepend("<div id='error' class='alert alert-error'><font color='red'><h2>Error!</h2></font> "+data.errorMsg+"</div>");
 		}else{
 			var userInfo = data.data;
 			if(userInfo.roleName == 'WAITER_USER') window.location.href="waiterIndex.html";

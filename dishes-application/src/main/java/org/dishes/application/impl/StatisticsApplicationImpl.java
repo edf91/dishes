@@ -59,7 +59,9 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 		
 		int sum = 0;
 		Set<Map.Entry<String,Integer>> sets = sortMap.entrySet();
+		int i = 0;
 		for(Iterator<Map.Entry<String, Integer>> iter = sets.iterator(); iter.hasNext();){
+			if(i++ == topNum) break;
 			Map.Entry<String, Integer> entry = iter.next();
 			Dish d = Dish.get(Dish.class, entry.getKey());
 			DishTop dishTop = new DishTop();

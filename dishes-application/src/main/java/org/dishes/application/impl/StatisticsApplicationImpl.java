@@ -29,10 +29,19 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 	// 一天的毫秒数
 	private static final long ONE_DAY_TIMESTAP = 86400000;
 	
+	/**
+	 * 实现热销饼图
+	 * topNum 为前几
+	 */
 	public List<DishTop> getTopDish(int topNum) {
+		// 存放统计结果
 		List<DishTop> results = new ArrayList<DishTop>();
+		
+		// 获取所有的订单信息
 		List<Order> allOrder = Order.findAllEntities();
+		// 通过map集合的特性（key不可重复），存放菜id--买出数的映射 
 		Map<String, Integer> dishIdNum = new HashMap<String, Integer>();
+		// 遍历所有订单，分析常规菜与活动，获取菜的销量
 		for (Order order : allOrder) {
 			String[] dishIds = DataUtil.toArrayStr(order.getDishIds());
 			for (String dishId : dishIds) {
@@ -48,7 +57,7 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 				}
 			}
 		}
-		
+		// 由于map为无序集合，因此通过自定义比较器实现map集合按照value值的顺序存放
 		List<Map.Entry<String, Integer>> sortList = new ArrayList<Map.Entry<String,Integer>>(dishIdNum.entrySet());
 		Collections.sort(sortList, new MapValueComparator());
 		Map<String, Integer> sortMap = new LinkedHashMap<String, Integer>();
@@ -56,10 +65,10 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 			Map.Entry<String, Integer> entry = ite.next();
 			sortMap.put(entry.getKey(), entry.getValue());
 		}
-		
+		// 存放进最后的结果集
 		int sum = 0;
 		Set<Map.Entry<String,Integer>> sets = sortMap.entrySet();
-		int i = 0;
+		int i = 0; // 用户判断是否已经达到topNum
 		for(Iterator<Map.Entry<String, Integer>> iter = sets.iterator(); iter.hasNext();){
 			if(i++ == topNum) break;
 			Map.Entry<String, Integer> entry = iter.next();
@@ -71,20 +80,26 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 			sum += entry.getValue();
 			results.add(dishTop);
 		}
-		
+		// 计算比例
 		for (DishTop d : results) {
 			d.setSum(sum);
 			if(sum != 0) d.setScale(Double.parseDouble(d.getNum() + "") / Double.parseDouble(sum + ""));
 		}
 		return results;
 	}
+	/**
+	 * 近nearDay的日销量
+	 */
 	public NearDayStatis nearDayStatis(int nearDay) {
+		// 结果集
 		NearDayStatis result = new NearDayStatis();
 		result.setNearDay(nearDay);
 		result.setTimes(initTimeArrayList(nearDay));
 		for(int i = 0; i < nearDay ; i++){
+			// 获取这段时间的订单
 			List<Order> orders = Order.findByOrderTimeBetween(result.getTimes().get(i + 1),result.getTimes().get(i));
 			double realSumPay = 0.0;
+			// 遍历订单
 			for (Order order : orders) {
 				realSumPay += order.getRealPrice();
 			}
@@ -92,6 +107,11 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 		}
 		return result;
 	}
+	/**
+	 * 通过nearDay获取各个日期的日期时间戳
+	 * @param nearDay
+	 * @return
+	 */
 	private List<Long> initTimeArrayList(int nearDay){
 		// 根据nearDay 初始化 times
 		List<Long> times = new ArrayList<Long>();
@@ -113,7 +133,7 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 		return times;
 	}
 	
-	public static void main(String[] args) throws ParseException {
+	/*public static void main(String[] args) throws ParseException {
 		// 获取当前年月日时间
 		int nearDay = 10;
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -134,5 +154,5 @@ public class StatisticsApplicationImpl implements StatisticsApplication{
 		for (Long dateStap : times) {
 			System.out.println(new Date(dateStap));
 		}
-	}
+	}*/
 }
